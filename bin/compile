@@ -9,7 +9,7 @@ bundler_version="1.14.6"
 
 export GEM_HOME="$cache_dir"
 export GEM_PATH="$cache_dir"
-gem install bundler --no-document --version "$bundler_version"
+gem install bundler --no-document --version "$bundler_version" --conservative
 
 bundle="$GEM_HOME/bin/bundle"
 gemfile="$bp_dir/Gemfile"
