@@ -5,11 +5,14 @@ set -e
 build_dir="$1"
 cache_dir="$2"
 bp_dir="$(dirname "$(dirname "$0")")"
+bundler_version="1.14.6"
 
-gem install bundler
+gem install bundler --no-document --version "$bundler_version" \
+	--install-dir "$cache_dir"
 
+bundle="$cache_dir/bin/bundle"
 gemfile="$bp_dir/Gemfile"
-bundle install --gemfile="$gemfile" --path="$cache_dir"
+"$bundle" install --gemfile="$gemfile" --path="$cache_dir"
 
 cd "$build_dir"
-env BUNDLE_GEMFILE="$gemfile" bundle exec jekyll build --quiet --trace
+env BUNDLE_GEMFILE="$gemfile" "$bundle" exec jekyll build --quiet --trace
