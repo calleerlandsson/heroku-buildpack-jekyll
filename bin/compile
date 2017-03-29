@@ -2,18 +2,25 @@
 
 set -e
 
+indent() {
+  sed -u 's/^/       /'
+}
+
 build_dir="$1"
 cache_dir="$2"
 bp_dir="$(dirname "$(dirname "$0")")"
 bundler_version="1.14.6"
 
+echo "-----> Installing dependencies using bundler $bundler_version"
 export GEM_HOME="$cache_dir"
 export GEM_PATH="$cache_dir"
-gem install bundler --no-document --version "$bundler_version" --conservative
+gem install bundler --no-document --version "$bundler_version" --conservative \
+	| indent
 
 bundle="$GEM_HOME/bin/bundle"
 gemfile="$bp_dir/Gemfile"
-"$bundle" install --gemfile="$gemfile" --path="$GEM_HOME"
+"$bundle" install --gemfile="$gemfile" --path="$GEM_HOME" | indent
 
+echo "-----> Building site using $("$bundle" exec jekyll --version)"
 cd "$build_dir"
 env BUNDLE_GEMFILE="$gemfile" "$bundle" exec jekyll build --quiet --trace
