@@ -7,7 +7,9 @@ cache_dir="$2"
 bp_dir="$(dirname "$(dirname "$0")")"
 
 gem install bundler
-bundle install --gemfile="$bp_dir/Gemfile" --path="$cache_dir"
+
+gemfile="$bp_dir/Gemfile"
+bundle install --gemfile="$gemfile" --path="$cache_dir"
 
 cd "$build_dir"
-env BUNDLE_GEMFILE="$bp_dir" bundle exec jekyll build --quiet --trace
+env BUNDLE_GEMFILE="$gemfile" bundle exec jekyll build --quiet --trace
