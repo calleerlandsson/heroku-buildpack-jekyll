@@ -13,7 +13,7 @@ gem install bundler --no-document --version "$bundler_version"
 
 bundle="$GEM_HOME/bin/bundle"
 gemfile="$bp_dir/Gemfile"
-"$bundle" install --gemfile="$gemfile"
+"$bundle" install --gemfile="$gemfile" --system
 
 cd "$build_dir"
 env BUNDLE_GEMFILE="$gemfile" "$bundle" exec jekyll build --quiet --trace
