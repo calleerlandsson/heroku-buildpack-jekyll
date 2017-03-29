@@ -7,8 +7,8 @@ cache_dir="$2"
 bp_dir="$(dirname "$(dirname "$0")")"
 bundler_version="1.14.6"
 
-GEM_HOME="$cache_dir"
-GEM_PATH="$cache_dir"
+export GEM_HOME="$cache_dir"
+export GEM_PATH="$cache_dir"
 gem install bundler --no-document --version "$bundler_version"
 
 bundle="$GEM_HOME/bin/bundle"
