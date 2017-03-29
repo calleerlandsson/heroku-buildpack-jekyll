@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+build_dir="$1"
+cache_dir="$2"
+bp_dir="$(dirname "$(dirname "$0")")"
+
+gem install bundler
+bundle install --gemfile="$bp_dir/Gemfile" --path="$cache_dir"
+
+cd "$build_dir"
+env BUNDLE_GEMFILE="$bp_dir" bundle exec jekyll build --quiet --trace
